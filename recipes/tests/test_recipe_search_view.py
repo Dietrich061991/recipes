@@ -35,7 +35,7 @@ class RecipeSearchViewTest(RecipeTestBase):
             slug='one', title=title1, author_data={'username': 'one'}
         )
         recipe2 = self.make_recipe(
-            slug='two', title=title2, author_data={'username': 'two'}
+            slug='two',  title=title2, author_data={'username': 'two'}
         )
 
         search_url = reverse('recipes:search')

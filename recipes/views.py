@@ -1,4 +1,4 @@
-
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http.response import Http404
 from django.shortcuts import get_list_or_404, get_object_or_404, render
@@ -10,8 +10,13 @@ def home(request):
     recipes = Recipe.objects.filter(
         is_published=True,
     ).order_by('-id')
+
+    current_page = request.GET.get('page', 1)
+    paginator = Paginator(recipes, 9)
+    page_obj = paginator.get_page(current_page)
+
     return render(request, 'recipes/pages/home.html', context={
-        'recipes': recipes,
+        'recipes': page_obj,
     })
 
 
@@ -41,7 +46,6 @@ def search(request):
 
     if not search_term:
         raise Http404()
-
     # https://docs.djangoproject.com/pt-br/3.2/topics/db/queries/#complex-lookups-with-q-objects
     # https://docs.djangoproject.com/pt-br/3.2/topics/db/queries/#field-lookups
     # | --> or

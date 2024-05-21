@@ -21,17 +21,27 @@ Django superusr:
     user: sdietrich 
     senha:123
 
-user: didi 
-senha:Didi061991
-ssh-keygen -t ed25519 -C "didimontcho@gmail.com"
-git remote remove origin
+
+
+
+#ssh-keygen -t ed25519 -C "didimontcho@gmail.com"
+ssh-keygen -t rsa -b 4096 -C "didimontcho@gmail.com"
+
+git config --global user.name "Sedami Dietrich Montcho"
+git config --global user.email "didimontcho@gmail.com"
+
 git init
+
+git remote add origin git@github.com:Dietrich061991/recipes.git
+ssh -T git@github.com
+
+
+
 git add .
 git commit -m "Meu primeiro commit"
-git remote add origin git@github.com:Dietrich061991/project-django.git
 git push --set-upstream origin main
-git push
 
+#git remote remove origin
 ##############################################################################
 
 O nosso repositório para as próximas aulas está no seguinte link:
@@ -115,4 +125,25 @@ user.save()
 python manage.py shell
 from recipes.models import Recipe
 r = Recipe.objects.get(pk=1)
-for i in range(100): r.id = None; r.slug = f'duplicada-{i}';r.save() 
+for i in range(100): r.id = None; r.slug = f'duplicada-{i}';r.save()
+
+############################################
+python manage.py shell
+from recipes.models import Recipe
+from django.db import transaction
+
+# Obtém todos os objetos Recipe ordenados pela chave primária atual
+recipes = Recipe.objects.all().order_by('pk')
+
+# Inicia a nova chave primária com 1
+new_pk = 1
+
+# Abre uma transação para garantir que todas as alterações sejam atômicas
+with transaction.atomic():
+    for recipe in recipes:
+        recipe.pk = new_pk
+        recipe.title = f'Hamburguer {new_pk}'
+        recipe.save()
+        new_pk += 1
+
+print("Todas as chaves primárias e títulos foram atualizados com sucesso!")
