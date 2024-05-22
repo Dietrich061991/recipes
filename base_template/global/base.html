@@ -3,20 +3,18 @@
 
 <head>
     {% include 'recipes/partials/head.html' %}
-    <title>{% block title %}{% endblock title %} Receitas</title>
+    <title>{% block title %}{% endblock title %} Recipes</title>
 </head>
 
 <body>
     {% include 'recipes/partials/header.html' %}
     {% include 'recipes/partials/search.html' %}
+
     <main class="main-content-container">
-        <div class="main-content main-content-list container">
-            <!-- esse bloc vai ser chamado no home.html-->
-            <!-- esse nome 'content' é apenas a definição do nome do bloc 
-            e poderia ser qualquer nome mas um nome unico. Ex: meu_bloc_content-->
-            {% block content %}{% endblock content %}
-        </div>
+        {% block content %}{% endblock content %}
+        {% include 'recipes/partials/pagination.html' %}
     </main>
+
     {% include 'recipes/partials/footer.html' %}
 </body>
 
