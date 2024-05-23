@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.contrib.messages import constants
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     ########## MEUS APPS ########
     'recipes',
+    'authors',
 ]
 
 MIDDLEWARE = [
@@ -56,13 +59,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'project.urls'
 
+# BASE_DIR/'recipes',
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 
         # adicionei BASE_DIR/'recipes' esse dentro de [] para adicionar o caminho do meu app
         # adicionei BASE_DIR/'base_template' esse dentro de [] para adicionar o pasat do base_template que não é um app
-        'DIRS': [BASE_DIR/'recipes', BASE_DIR/'base_template'],
+        'DIRS': [BASE_DIR/'base_template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -142,3 +146,12 @@ STATIC_ROOT = BASE_DIR / 'static'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MESSAGE_TAGS = {
+    constants.DEBUG: 'message-debug',
+    constants.ERROR: 'message-error',
+    constants.INFO: 'message-info',
+    constants.SUCCESS: 'message-success',
+    constants.WARNING: 'message-warning',
+}
