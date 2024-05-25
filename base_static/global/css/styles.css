@@ -258,14 +258,12 @@ h6 {
 .pagination .page-current {
   background: var(--color-primary-dark);
 }
-
 /* Forms */
 .form-content {
   max-width: 64rem;
   margin: 0 auto;
   margin-bottom: var(--spacing-gutter-medium);
 }
-
 .form-content label,
 .form-content .help-text,
 .errorlist {
@@ -274,29 +272,38 @@ h6 {
   font-size: 1.4rem;
   list-style-type: none;
 }
-
 .errorlist {
   color: var(--color-error-dark);
 }
-
 .form-content input {
   width: 100%;
   padding: 1rem;
   border-radius: 0.4rem;
   border: 1px solid var(--color-primary-dark);
 }
-
 .form-content-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   gap: calc(var(--spacing-gutter-medium) / 2) var(--spacing-gutter-medium);
 }
-
 .form-content button {
   padding: 1rem 2rem;
   border: none;
   background: var(--color-primary-dark);
   color: var(--color-white);
+}
+
+.inline-form {
+  display: inline;
+}
+
+.plaintext-button {
+  display: inline;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-primary);
+  font-size: 1.6rem;
 }
 
 /* Messages */
@@ -322,9 +329,6 @@ h6 {
   background: var(--color-success-light);
   color: var(--color-success-dark);
 }
-
-
-
 .message-warning {
   border: 1px solid var(--color-warning-dark);
   background: var(--color-warning-light);
@@ -355,7 +359,6 @@ h6 {
 .m-y {
   margin: var(--spacing-gutter-medium) 0;
 }
-
 @media (max-width: 600px) {
   .main-content-list,
   .form-content-grid {
