@@ -1,33 +1,28 @@
+
 from django.contrib import admin
 
 from .models import Category, Recipe
-
-# Register your models here.
-
-
-class RecipeAdmin(admin.ModelAdmin):
-    ...
 
 
 class CategoryAdmin(admin.ModelAdmin):
     ...
 
 
+@admin.register(Recipe)
+class RecipeAdmin(admin.ModelAdmin):
+    # list_display. etc .. são propriedades do proprio django
+    list_display = ('id', 'title', 'created_at', 'is_published', 'author',)
+    list_display_links = ('title', 'created_at',)
+    # adicionei author__username para buscar pelo nome do usuario tbm
+    search_fields = ('id', 'title', 'description', 'slug', 'preparation_steps','author__username')
+    list_filter = ('category', 'author', 'is_published', 'preparation_steps_is_html',)
+    list_per_page = 10
+    list_editable = ('is_published',)
+    ordering = '-id',
+    prepopulated_fields = {
+        "slug": ('title',)
+    }
+    #autocomplete_fields = 'tags',
+
+
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Recipe, RecipeAdmin)
-
-# ou fazer assim
-# @admin.register(Recipe)
-# class RecipeAdmin(admin.ModelAdmin):
-#    ...
-
-'''
-ou fazer assim
-def register_models(*models):
-    for model in models:
-        admin.site.register(model, admin.ModelAdmin)
-    return None
-
-
-register_models(Category, Recipe)
-'''

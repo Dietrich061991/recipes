@@ -11,13 +11,12 @@ CHROMEDRIVER_PATH = ROOT_PATH / 'bin' / CHROMEDRIVER_NAME
 
 def make_chrome_browser(*options):
     chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--disable-features=InterestCohort')
-    # chrome_options.add_argument('--disable-features=BrowsingTopics')
 
-    if options is not None:
-        for option in options:
-            chrome_options.add_argument(option)
+    # if options is not None:
+    #    for option in options:
+    #        chrome_options.add_argument(option)
+    # if os.environ.get('SELENIUM_HEADLESS') == '1':
+    #    chrome_options.add_argument('--headless')
 
     chrome_service = Service(executable_path=CHROMEDRIVER_PATH)
     browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
@@ -25,6 +24,7 @@ def make_chrome_browser(*options):
 
 
 if __name__ == '__main__':
+    # browser = make_chrome_browser('--headless')
     browser = make_chrome_browser()
     browser.get('http://www.udemy.com/')
     sleep(5)
